@@ -17,7 +17,12 @@ export default function Login() {
       <h1 className="text-2xl mb-4">Login</h1>
       <input type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="Email" className="block mb-2 w-full rounded border px-2 py-1"/>
       <input type="password" value={password} onChange={e=>setPassword(e.target.value)} placeholder="Password" className="block mb-4 w-full rounded border px-2 py-1"/>
-      <button type="submit" className="btn btn-primary w-full">Entrar</button>
+      <button
+        type="submit"
+        className="w-full rounded bg-blue-600 text-white py-2 transition-colors active:bg-blue-800 hover:bg-blue-700"
+      >
+        Entrar
+      </button>
     </form>
   )
 }
