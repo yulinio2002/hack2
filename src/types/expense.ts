@@ -7,3 +7,4 @@ export interface Expense {
   month: number
   amount: number
 }
+

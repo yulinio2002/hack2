@@ -23,12 +23,17 @@ privateApi.interceptors.request.use((config) => {
 });
 
 // Funciones de expenses (usarán privateApi)
+export const getExpensesCategory = () =>
+  privateApi.get('/expenses_category');
+
 export const getSummary = () => privateApi.get('/expenses_summary');
 
 export const getDetails = (year: number, month: number, categoryId: number) =>
   privateApi.get('/expenses/detail', { 
     params: { year, month, categoryId } 
   });
+
+
 
 export const createExpense = (payload: any) => 
   privateApi.post('/expenses', payload);

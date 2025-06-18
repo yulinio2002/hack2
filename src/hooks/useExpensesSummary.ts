@@ -1,8 +1,16 @@
 import { useQuery } from '@tanstack/react-query'
-import { getSummary } from '../api/expenses'
+import { getExpensesCategory, getSummary } from '../api/expenses'
 
-export const useExpensesSummary = (year: number, month: number) =>
+export const useExpensesGetCategory = () =>
     useQuery({
-        queryKey: ['summary', year, month],
-        queryFn: () => getSummary(year, month),
+        queryKey: ['expensesCategory'],
+        queryFn: () => getExpensesCategory()
     })
+
+    export const useExpensesSummary = () =>
+    useQuery({
+        queryKey: ['expensesSummary'],
+        queryFn: () => getSummary()
+    })
+
+
