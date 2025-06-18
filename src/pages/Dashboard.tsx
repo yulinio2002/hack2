@@ -25,7 +25,7 @@ const Dashboard: React.FC = () => {
       </div>
     )
   }
-
+  
   return (
     <div className="p-4">
       <h1 className="text-3xl font-bold mb-6">Categorías de Gastos</h1>
