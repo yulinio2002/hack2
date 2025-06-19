@@ -3,6 +3,7 @@ import { useParams, useSearchParams } from 'react-router-dom'
 import { useExpenseDetails } from '../hooks/useExpensesSummary'
 import { createExpense, deleteExpense } from '../api/expenses'
 import type { Expense } from '../types/expense'
+import { formatCurrency } from '../utils/formatters'
 
 export default function CategoryDetail() {
   const { id } = useParams<{ id: string }>()
@@ -52,7 +53,7 @@ export default function CategoryDetail() {
       <ul className="space-y-2">
         {expenses.map(exp => (
           <li key={exp.id} className="border p-2 flex justify-between">
-            <span>S/. {exp.amount}</span>
+            <span>{formatCurrency(exp.amount)}</span>
             <button
               onClick={() => removeExpense(exp.id)}
               className="text-red-600 hover:underline"

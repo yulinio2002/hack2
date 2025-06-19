@@ -1,2 +1,2 @@
 export const formatCurrency = (value: number) =>
-  '$' + value.toFixed(2)
+  `S/. ${value.toFixed(2)}`
