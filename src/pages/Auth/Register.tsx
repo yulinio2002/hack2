@@ -10,7 +10,8 @@ export default function Register() {
   const submit = async (e: React.FormEvent) => {
     e.preventDefault()
     await signUp(email, password)
-    nav('/')
+    // Redirigir al login tras registro exitoso
+    nav('/login')
   }
   return (
     <form onSubmit={submit} className="max-w-sm mx-auto p-4">

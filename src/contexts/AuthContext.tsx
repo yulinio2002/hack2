@@ -25,12 +25,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }
 
   const signUp = async (email: string, passwd: string) => {
-    const res = await register({ email, passwd })
-    const tokenValue = res.data.data?.token
-    setToken(tokenValue)
-    setUserEmail(email)
-    localStorage.setItem('token', tokenValue)
-    localStorage.setItem('email', email)
+    await register({ email, passwd })
+    // No establecer token ni email en el registro para obligar al
+    // usuario a iniciar sesión posteriormente.
   }
 
   const signOut = () => {
