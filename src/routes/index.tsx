@@ -4,7 +4,7 @@ import { useAuth } from '../hooks/useAuth'
 import Login from '../pages/Auth/Login'
 import Register from '../pages/Auth/Register'
 import Dashboard from '../pages/Dashboard'
-import CategoryDetail from '../pages/CategoryDetail.tsx'
+import CategoryDetail from '../pages/CategoryDetail'
 import Goals from '../pages/Goals'
 import Layout from '../components/Layout'
 
@@ -18,6 +18,7 @@ export const AppRoutes = () => (
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+
       <Route
         path="/"
         element={
@@ -28,6 +29,7 @@ export const AppRoutes = () => (
           </PrivateRoute>
         }
       />
+
       <Route
         path="/category/:id"
         element={
@@ -38,6 +40,7 @@ export const AppRoutes = () => (
           </PrivateRoute>
         }
       />
+
       <Route
         path="/goals"
         element={
@@ -48,6 +51,8 @@ export const AppRoutes = () => (
           </PrivateRoute>
         }
       />
+
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   </BrowserRouter>
 )

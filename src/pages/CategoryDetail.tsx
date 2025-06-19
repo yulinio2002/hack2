@@ -5,17 +5,17 @@ import { createExpense, deleteExpense } from '../api/expenses'
 import type { Expense } from '../types/expense'
 
 export default function CategoryDetail() {
-  const { id } = useParams()
+  const { id } = useParams<{ id: string }>()
   const [search] = useSearchParams()
   const year = Number(search.get('year'))
   const month = Number(search.get('month'))
   const { data, isLoading, isError, refetch } = useExpenseDetails(year, month, Number(id))
   const expenses: Expense[] = data?.data ?? []
-  const [amount, setAmount] = useState(0)
+  const [amount, setAmount] = useState<number>(0)
 
   const addExpense = async (e: React.FormEvent) => {
     e.preventDefault()
-    await createExpense({ amount, categoryId: Number(id), year, month })
+    await createExpense({ amount, year, month, categoryId: Number(id) })
     setAmount(0)
     refetch()
   }
@@ -25,29 +25,38 @@ export default function CategoryDetail() {
     refetch()
   }
 
-  if (isLoading) return <div className="p-4">Cargando detalles...</div>
-  if (isError) return <div className="p-4 text-red-500">Error al cargar detalles</div>
+  if (isLoading) return <div>Cargando detalles…</div>
+  if (isError) return <div className="text-red-600">Error al cargar detalles.</div>
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Detalles de Categoría</h1>
-      <form onSubmit={addExpense} className="mb-4 space-x-2">
+    <div>
+      <h1 className="text-xl mb-4">Detalle de categoría {id} – {month}/{year}</h1>
+
+      <form onSubmit={addExpense} className="mb-4 flex gap-2">
         <input
           type="number"
+          placeholder="Monto"
           value={amount}
           onChange={e => setAmount(Number(e.target.value))}
-          className="border px-2 py-1 rounded"
-          placeholder="Monto"
+          className="border rounded px-2 py-1 flex-1"
+          min={0}
         />
-        <button className="bg-blue-600 text-white px-3 py-1 rounded" type="submit">
-          Agregar
+        <button
+          type="submit"
+          className="bg-green-600 text-white px-4 py-1 rounded hover:bg-green-700"
+        >
+          + Agregar
         </button>
       </form>
+
       <ul className="space-y-2">
         {expenses.map(exp => (
           <li key={exp.id} className="border p-2 flex justify-between">
             <span>S/. {exp.amount}</span>
-            <button onClick={() => removeExpense(exp.id)} className="text-red-600">
+            <button
+              onClick={() => removeExpense(exp.id)}
+              className="text-red-600 hover:underline"
+            >
               Eliminar
             </button>
           </li>

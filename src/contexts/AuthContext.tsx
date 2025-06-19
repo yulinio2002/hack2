@@ -17,17 +17,32 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const signIn = async (email: string, passwd: string) => {
     const res = await login({ email, passwd })
-    const tokenValue = res.data.data?.token
-    setToken(tokenValue)
-    setUserEmail(email)
-    localStorage.setItem('token', tokenValue)
-    localStorage.setItem('email', email)
+    // Debugging: ver estructura completa de la respuesta JSON
+    console.debug('Auth login response:', res.data)
+
+    const raw = res.data as any
+    // Soporta { data: {...} } o { result: {...} }
+    const lvl1 = raw.data ?? raw.result
+    // Anidaciones adicionales, si existieran
+    const lvl2 = lvl1?.data ?? lvl1?.result
+    const payload = lvl2 ?? lvl1 ?? raw
+
+    const tkn = payload.token ?? payload.accessToken ?? payload.access_token
+    if (!tkn) {
+      console.error('Login payload missing token:', payload)
+      throw new Error('Error al autenticar: no se recibió token del servidor')
+    }
+
+    const em = payload.email ?? payload.user?.email ?? email
+
+    setToken(tkn)
+    setUserEmail(em)
+    localStorage.setItem('token', tkn)
+    localStorage.setItem('email', em)
   }
 
   const signUp = async (email: string, passwd: string) => {
     await register({ email, passwd })
-    // No establecer token ni email en el registro para obligar al
-    // usuario a iniciar sesión posteriormente.
   }
 
   const signOut = () => {

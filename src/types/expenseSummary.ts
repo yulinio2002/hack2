@@ -1,8 +1,9 @@
 import type { ExpenseCategory } from './expenseCategory'
 
 export interface ExpenseSummary {
+  id: number
   expenseCategory: ExpenseCategory
-  total: number
+  amount: number
   year: number
   month: number
 }
