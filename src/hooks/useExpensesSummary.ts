@@ -1,5 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
-import { getExpensesCategory, getSummary } from '../api/expenses'
+import { getExpensesCategory, getSummary, deleteExpense } from '../api/expenses'
+import { use } from 'react'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 export const useExpensesGetCategory = () =>
     useQuery({
@@ -7,10 +9,24 @@ export const useExpensesGetCategory = () =>
         queryFn: () => getExpensesCategory()
     })
 
-    export const useExpensesSummary = () =>
+export const useExpensesSummary = () =>
     useQuery({
         queryKey: ['expensesSummary'],
         queryFn: () => getSummary()
     })
 
+export const useDeleteExpense = () => {
+    const queryClient = useQueryClient()
+    
+    return useMutation({
+        mutationFn: (id: number) => deleteExpense(id),
+        onSuccess: () => {
+            // Invalidar y refrescar la query de summaries después de eliminar
+            queryClient.invalidateQueries({ queryKey: ['expensesSummary'] })
+        },
+        onError: (error) => {
+            console.error('Error al eliminar gasto:', error)
+        }
+    })
+}
 

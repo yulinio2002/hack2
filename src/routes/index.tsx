@@ -55,7 +55,7 @@ export const AppRoutes = () => (
       <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
       
       {/* Redirigir "/" al dashboard si está autenticado, sino al login */}
-      <Route path="/" element={<Navigate to="/dashboard" replace />} />
+      <Route path="/" element={<Navigate to="/login" replace />} />
       
       {/* Rutas privadas (con navbar) */}
       <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
