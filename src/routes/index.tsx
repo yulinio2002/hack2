@@ -6,6 +6,7 @@ import Register from '../pages/Auth/Register'
 import Dashboard from '../pages/Dashboard'
 import CategoryDetail from '../pages/CategoryDetail.tsx'
 import Goals from '../pages/Goals'
+import Layout from '../components/Layout'
 
 const PrivateRoute: React.FC<{ children: React.ReactElement }> = ({ children }) => {
   const { token } = useAuth()
@@ -17,9 +18,36 @@ export const AppRoutes = () => (
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/" element={<PrivateRoute><Dashboard/></PrivateRoute>} />
-      <Route path="/category/:id" element={<PrivateRoute><CategoryDetail/></PrivateRoute>} />
-      <Route path="/goals" element={<PrivateRoute><Goals/></PrivateRoute>} />
+      <Route
+        path="/"
+        element={
+          <PrivateRoute>
+            <Layout>
+              <Dashboard />
+            </Layout>
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/category/:id"
+        element={
+          <PrivateRoute>
+            <Layout>
+              <CategoryDetail />
+            </Layout>
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/goals"
+        element={
+          <PrivateRoute>
+            <Layout>
+              <Goals />
+            </Layout>
+          </PrivateRoute>
+        }
+      />
     </Routes>
   </BrowserRouter>
 )
