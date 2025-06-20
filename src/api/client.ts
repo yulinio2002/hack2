@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 const api = axios.create({
-  // baseURL: 'http://198.211.105.95:8080',
-  baseURL: 'http://localhost:8000',
+  // Fallback a localhost si no existe la variable de entorno
+  baseURL: import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8000',
 })
 
 api.interceptors.request.use(config => {
