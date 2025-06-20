@@ -6,9 +6,8 @@ import Login from '../pages/Auth/Login'
 import Register from '../pages/Auth/Register'
 import Dashboard from '../pages/Dashboard'
 import CategoryDetail from '../pages/CategoryDetail'
-import SearchExpenses from '../pages/SearchExpensesPlaceholder ' // Página nueva que necesitarás crear
-import NewExpense from '../pages/NewExpensePlaceholder ' // Página nueva que necesitarás crear
-import Goals from '../pages/GoalsPlaceholder' // Descomenta cuando la tengas lista
+import SearchExpenses from '../pages/SearchExpensesPlaceholder ' 
+import Goals from '../pages/GoalsPlaceholder' 
 
 // Componente Layout que incluye la Navbar
 const Layout: React.FC<{ children: React.ReactElement }> = ({ children }) => {
@@ -61,7 +60,6 @@ export const AppRoutes = () => (
       <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
       <Route path="/category/:id" element={<PrivateRoute><CategoryDetail /></PrivateRoute>} />
       <Route path="/search" element={<PrivateRoute><SearchExpenses /></PrivateRoute>} />
-      <Route path="/expenses/new" element={<PrivateRoute><NewExpense /></PrivateRoute>} />
       <Route path="/goals" element={<PrivateRoute><Goals/></PrivateRoute>} />
       
       {/* Ruta 404 - página no encontrada */}

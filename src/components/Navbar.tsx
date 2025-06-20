@@ -12,7 +12,7 @@ const Navbar: React.FC = () => {
   const navItems: NavItem[] = [
     { name: 'Resumen de Gastos', href: '/dashboard', icon: '📊' },
     { name: 'Buscar Gastos', href: '/search', icon: '🔍' },
-    { name: 'Registrar Gastos', href: '/expenses/new', icon: '➕' },
+    // { name: 'Registrar Gastos', href: '/expenses/new', icon: '➕' },
     { name: 'Mis Metas Ahorristas', href: '/goals', icon: '🎯' }
   ];
 

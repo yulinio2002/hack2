@@ -1,4 +1,4 @@
-import React from 'react'
+
 import type { ExpenseSummary } from '../types/expenseSummary';
 
 function Card({ item, deleteFunction }: { item: ExpenseSummary; deleteFunction: (id: number) => void }) {

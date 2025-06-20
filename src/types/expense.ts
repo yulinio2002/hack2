@@ -1,4 +1,4 @@
-import type { ExpenseCategory } from './expenseCategory';
+import type { ExpenseCategory, ExpenseCategoryCreate } from './expenseCategory';
 
 export interface Expense {
   id: number
@@ -8,3 +8,8 @@ export interface Expense {
   amount: number
 }
 
+export interface ExpenseCreate {
+  category: ExpenseCategoryCreate
+  date: string
+  amount: number
+}
